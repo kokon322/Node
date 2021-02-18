@@ -51,31 +51,3 @@ fs.readdir(path20_00, ((err, files) => {
         }));
     });
 }));
-
-
-// fs.readdir(path20_00, ((err, files) => {
-//     if (err) {
-//         console.log(err);
-//         return;
-//     }
-//     files.forEach(fileName => {
-//         fs.readFile(path.join(path20_00, fileName), (err, data) => {
-//             if (err) {
-//                 console.log(err);
-//                 return;
-//             }
-//             let user = JSON.parse(data);
-//             if (user.gender === 'male'){
-//                 console.log(user);
-//             }else {
-//                 console.log(`___________`);
-//                 console.log(user);
-//                 console.log(`____________`);
-//             }
-//         })
-//     })
-// }))
-
-// fs.rename(path.join(path18_00, 'Andriy.txt'), path.join(path20_00, `Andriy.txt`), (err) => {
-//     console.log(err);
-// })
