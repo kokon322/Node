@@ -57,30 +57,12 @@ async function login(email, password) {
     }
 }
 
-// async function getUserById(id) {
-//     try {
-//         const users = await getAllUsers();
-//         const result = users.some(user => {
-//             return user.id === id;
-//         });
-//         if (!result) {
-//             console.log('user with this id undefined');
-//             return;
-//         }
-//         const userResult = users.filter(user => user.id === id);
-//         console.log(userResult);
-//         return userResult;
-//     } catch (err) {
-//         console.log(err);
-//     }
-// }
-
 async function getUserById(id) {
     try {
         const users = await getAllUsers();
         return new Promise((resolve, reject) => {
             const result = users.some(user => {
-                return user.id === id;
+                return +user.id === +id;
             });
             if (result) {
                 const userResult = users.filter(user => user.id === id);
