@@ -2,10 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const expressHbs = require('express-handlebars');
+const session = require('express-session');
 const {getAllUsers, addUserForEmail, login, getUserById} = require('./allFunctions');
 
 const app = express();
 
+
+app.use(session({secret: 'mySecret', resave: false, saveUninitialized: false}));
 app.use(express.static(path.join(__dirname, 'views')));
 app.set('view engine', '.hbs');
 app.engine('.hbs', expressHbs({defaultLayout: false}));
@@ -26,33 +29,61 @@ app.use(express.urlencoded({extended: true}));
 //
 //При логінації юзер так само ввоить мейл та пароль і вам необхідно знайти його мейлик в списку юзерів та якщо такий мейлик з таким паролем є,
 //то віддати інформацію про юзера. В інакшому випадку сказати, що необхідно реєструватись.
-//
-//При реєстрації мейли не можуть повторюватись
+
+function testSend(req, res, value, url) {
+    req.session.message = value;
+    res.redirect(url);
+}
+
 app.listen(5000, () => {
     console.log(`server is work`);
 });
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+app.get('/users', ((req, res) => {
+    getAllUsers().then(value => {
+        res.render('allUsers', {value});
+    });
+}));
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+app.get('/', ((req, res) => {
+    res.render('registration');
+}));
+
+app.post('/', ((req, res) => {
+    addUserForEmail(req.body).then(value => {
+        res.redirect('/users');
+    }).catch(value => {
+        testSend(req, res, value, '/error');
+    })
+}))
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.get('/login', ((req, res) => {
     res.render('login');
 }));
 
 app.post('/login', ((req, res) => {
-    const {email, password} = req.body;
-    login(email,password).then(value => {
-        let {name, email, id} = value;
-        res.render('user', {name, email, id});
+    const {password, email} = req.body;
+    login(email, password).then(value => {
+        console.log(value);
+        res.render('user', {value})
+    }).catch(value => {
+        testSend(req, res, value, '/error')
     })
-
 }));
-
-app.get('/users', ((req, res) => {
-
-}));
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 app.get('/users/:id', ((req, res) => {
 
 }));
 
-app.get('/error', ((req, res) => {
-
-}));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+app.get('/error', (req, res) => {
+    const message = req.session.message;
+    res.render('error', {message});
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////

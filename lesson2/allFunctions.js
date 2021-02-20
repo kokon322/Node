@@ -6,23 +6,6 @@ const writeFile = promisify(fs.writeFile);
 
 const pathToUsersFile = path.join(__dirname, 'users.txt');
 
-async function addUserForEmail(newUser) {
-    try {
-        let allUsers = await getAllUsers();
-        const result = allUsers.some(user => {
-            return user.email === newUser.email;
-        });
-        if (result) {
-            console.log('this email already exists');
-            return;
-        }
-        newUser.id = allUsers.length + 1; // (трохи кастиль)
-        allUsers.push(newUser);
-        await writeFile(pathToUsersFile, JSON.stringify(allUsers));
-    } catch (err) {
-        console.log(err);
-    }
-}
 
 async function getAllUsers() {
     try {
@@ -30,6 +13,43 @@ async function getAllUsers() {
         return JSON.parse(data.toString());
     } catch (err) {
         console.log(err);
+    }
+}
+
+async function addUserForEmail(newUser) {
+    try {
+        let allUsers = await getAllUsers();
+        return new Promise((resolve, reject) => {
+            const result = allUsers.some(user => {
+                return user.email === newUser.email;
+            });
+            if (!result) {
+                newUser.id = allUsers.length + 1; // (трохи кастиль)
+                allUsers.push(newUser);
+                writeFile(pathToUsersFile, JSON.stringify(allUsers));
+                resolve('ok')
+            } else reject('this email already exists');
+
+        });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function login(email, password) {
+    try {
+        let allUsers = await getAllUsers();
+        return new Promise((resolve, reject) => {
+            const result = allUsers.some(user => {
+                return user.email === email && user.password === password;
+            });
+            if (result) {
+                const userResult = allUsers.filter(value => value.email === email);
+                resolve(userResult);
+            } else reject('You mast to registration');
+        });
+    } catch (e) {
+        console.log(e);
     }
 }
 
@@ -51,22 +71,7 @@ async function getUserById(id) {
     }
 }
 
-async function login(email, password) {
-    try {
-        let allUsers = await getAllUsers();
-        const result = allUsers.some(user => {
-            return user.email === email && user.password === password;
-        });
-        if (!result) {
-            return 'You are need to registration';
-        }
-        const userResult = allUsers.filter(value => value.email === email);
-        console.log(userResult);
-        return userResult[0];
-    } catch (err) {
-        console.log(err);
-    }
-}
+
 
 module.exports = {
     getAllUsers,
