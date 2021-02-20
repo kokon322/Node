@@ -1,12 +1,10 @@
-const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const expressHbs = require('express-handlebars');
 const session = require('express-session');
-const {getAllUsers, addUserForEmail, login, getUserById} = require('./allFunctions');
+const {getAllUsers, addUserForEmail, login, getUserById, testSend} = require('./allFunctions');
 
 const app = express();
-
 
 app.use(session({secret: 'mySecret', resave: false, saveUninitialized: false}));
 app.use(express.static(path.join(__dirname, 'views')));
@@ -30,11 +28,6 @@ app.use(express.urlencoded({extended: true}));
 //При логінації юзер так само ввоить мейл та пароль і вам необхідно знайти його мейлик в списку юзерів та якщо такий мейлик з таким паролем є,
 //то віддати інформацію про юзера. В інакшому випадку сказати, що необхідно реєструватись.
 
-function testSend(req, res, value, url) {
-    req.session.message = value;
-    res.redirect(url);
-}
-
 app.listen(5000, () => {
     console.log(`server is work`);
 });
@@ -46,7 +39,7 @@ app.get('/users', ((req, res) => {
     });
 }));
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////,
 app.get('/', ((req, res) => {
     res.render('registration');
 }));
@@ -78,7 +71,9 @@ app.post('/login', ((req, res) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 app.get('/users/:id', ((req, res) => {
-
+    getUserById(req.params.id).then(value => {
+        console.log(value);
+    })
 }));
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
