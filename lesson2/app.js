@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const expressHbs = require('express-handlebars');
-const {getAllUsers, addUserForEmail} = require('./allFunctions');
+const {getAllUsers, addUserForEmail,login,getUserById} = require('./allFunctions');
 
 // Вам потрібно реалізувати мінімум 5 строрінок.
 // 1) Реєстрація
@@ -11,8 +11,6 @@ const {getAllUsers, addUserForEmail} = require('./allFunctions');
 // 4) Інформація про одного юзера
 // 5) Помилка
 //
-// Створити файл з юзерами, який буде виступати в ролі бази данних.
-//
 // При реєстрації юзер вводть мейл, нік та пороль і ви його данні дописуєте в файл.
 // Але тільки якщо його немає ще. Якшо він є, то видаєте помилку.
 // Після реєстрації переходите на сторінку зі всіма юзерми.
@@ -20,8 +18,6 @@ const {getAllUsers, addUserForEmail} = require('./allFunctions');
 //При логінації юзер так само ввоить мейл та пароль і вам необхідно знайти його мейлик в списку юзерів та якщо такий мейлик з таким паролем є,
 //то віддати інформацію про юзера. В інакшому випадку сказати, що необхідно реєструватись.
 //
-//І відображення всіх юзерів це відповідно просто виведення списку вісх юзерів.
-//
 //При реєстрації мейли не можуть повторюватись
-let user = {name: 'user', password: '324351', email: 'sasha@gmail.om'}
-addUserForEmail(user);
+let user = {name: 'user', password: '324351', email: 'sasha@gmail.сom'}
+getUserById(3);
