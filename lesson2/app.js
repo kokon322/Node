@@ -5,6 +5,14 @@ const expressHbs = require('express-handlebars');
 const {getAllUsers, addUserForEmail, login, getUserById} = require('./allFunctions');
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, 'views')));
+app.set('view engine', '.hbs');
+app.engine('.hbs', expressHbs({defaultLayout: false}));
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 // Вам потрібно реалізувати мінімум 5 строрінок.
 // 1) Реєстрація
 // 2) Логінація.
@@ -24,11 +32,16 @@ app.listen(5000, () => {
     console.log(`server is work`);
 });
 
-app.get('/', ((req, res) => {
-
+app.get('/login', ((req, res) => {
+    res.render('login');
 }));
 
-app.post('/', ((req, res) => {
+app.post('/login', ((req, res) => {
+    const {email, password} = req.body;
+    login(email,password).then(value => {
+        let {name, email, id} = value;
+        res.render('user', {name, email, id});
+    })
 
 }));
 

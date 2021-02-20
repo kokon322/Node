@@ -58,12 +58,11 @@ async function login(email, password) {
             return user.email === email && user.password === password;
         });
         if (!result) {
-            console.log('You are need to registration');
-            return;
+            return 'You are need to registration';
         }
         const userResult = allUsers.filter(value => value.email === email);
         console.log(userResult);
-        return userResult;
+        return userResult[0];
     } catch (err) {
         console.log(err);
     }
