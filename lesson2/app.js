@@ -2,8 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const expressHbs = require('express-handlebars');
-const {getAllUsers, addUserForEmail,login,getUserById} = require('./allFunctions');
+const {getAllUsers, addUserForEmail, login, getUserById} = require('./allFunctions');
 
+const app = express();
 // Вам потрібно реалізувати мінімум 5 строрінок.
 // 1) Реєстрація
 // 2) Логінація.
@@ -19,5 +20,26 @@ const {getAllUsers, addUserForEmail,login,getUserById} = require('./allFunctions
 //то віддати інформацію про юзера. В інакшому випадку сказати, що необхідно реєструватись.
 //
 //При реєстрації мейли не можуть повторюватись
-let user = {name: 'user', password: '324351', email: 'sasha@gmail.сom'}
-getUserById(3);
+app.listen(5000, () => {
+    console.log(`server is work`);
+});
+
+app.get('/', ((req, res) => {
+
+}));
+
+app.post('/', ((req, res) => {
+
+}));
+
+app.get('/users', ((req, res) => {
+
+}));
+
+app.get('/users/:id', ((req, res) => {
+
+}));
+
+app.get('/error', ((req, res) => {
+
+}));

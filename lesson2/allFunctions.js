@@ -49,8 +49,6 @@ async function getUserById(id) {
     } catch (err) {
         console.log(err);
     }
-
-
 }
 
 async function login(email, password) {
@@ -66,7 +64,6 @@ async function login(email, password) {
         const userResult = allUsers.filter(value => value.email === email);
         console.log(userResult);
         return userResult;
-
     } catch (err) {
         console.log(err);
     }

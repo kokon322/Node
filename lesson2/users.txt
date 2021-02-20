@@ -1,2 +1,4 @@
-[{"name":"user","password":"324351","email":"sasha@gmail.om","id":1},
-{"name":"user","password":"324351","email":"sasha@gmail.сom","id":2}]
+[
+{"name":"user","password":"324351","email":"sasha@gmail.om","id":1},
+{"name":"user","password":"324351","email":"sasha@gmail.сom","id":2}
+]
