@@ -43,9 +43,9 @@ app.get('/login', ((req, res) => {
 app.post('/login', ((req, res) => {
     const {password, email} = req.body;
     login(email, password).then(value => {
-        res.render('user', {value})
+        res.render('user', {value});
     }).catch(value => {
-        testSend(req, res, value, '/error')
+        testSend(req, res, value, '/error');
     });
 }));
 
@@ -53,11 +53,11 @@ app.get('/users/:id', ((req, res) => {
     getUserById(req.params.id).then(value => {
         res.render('user', {value});
     }).catch(value => {
-        testSend(req, res, value, '/error')
+        testSend(req, res, value, '/error');
     });
 }));
 
 app.get('/error', (req, res) => {
-    const message = req.session.message;
+    const {message} = req.session;
     res.render('error', {message});
 });

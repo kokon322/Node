@@ -9,7 +9,7 @@ const pathToUsersFile = path.join(__dirname, 'users.txt');
 function testSend(req, res, value, url) {
     req.session.message = value;
     res.redirect(url);
-}
+} // цей метод піддивився у гуглі.
 
 async function getAllUsers() {
     try {
