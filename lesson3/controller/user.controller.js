@@ -23,5 +23,12 @@ module.exports = {
         }
     },
     deleteUserById: async (req, res) => {
+        try {
+            const {userId} = req.params;
+            await userService.deleteUserById(userId);
+            res.json('user deleted');
+        }catch (err) {
+            console.log(err);
+        }
     }
 }

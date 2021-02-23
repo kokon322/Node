@@ -41,7 +41,7 @@ module.exports = {
             const result = allUsers.some(user => {
                 return user.email === req.body.email;
             });
-            if (result || name.length < 5 || name.length > 20 || Number.isInteger(name) || password.length < 5 ||
+            if (result || name.length < 1 || name.length > 20 || Number.isInteger(name) || password.length < 5 ||
                 email.length < 10 || email.length > 50 || !email.includes('@')) {
                 throw new Error('User is not valid');
             }

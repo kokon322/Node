@@ -27,11 +27,27 @@ module.exports = {
         }
     },
     createUser: async (user) => {
-        const data = await readFile(pathToDB);
-        let allUsers = JSON.parse(data.toString());
-        user.id = allUsers.length + 1;
-        allUsers.push(user);
-        await writeFile(pathToDB, JSON.stringify(allUsers));
-    },
+        try {
+            const data = await readFile(pathToDB);
+            let allUsers = JSON.parse(data.toString());
+            user.id = allUsers.length + 1;
+            allUsers.push(user);
+            await writeFile(pathToDB, JSON.stringify(allUsers));
+        } catch (err) {
+            console.log(err);
+        }
 
+    },
+    deleteUserById: async (id) => {
+        try {
+            const data = await readFile(pathToDB);
+            let allUsers = JSON.parse(data.toString());
+            const resultArrayUsers = allUsers.filter(user => {
+                return +user.id !== +id;
+            });
+            await writeFile(pathToDB, JSON.stringify(resultArrayUsers));
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
