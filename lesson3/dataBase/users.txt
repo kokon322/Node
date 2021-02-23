@@ -1,0 +1,4 @@
+[
+{"name":"Igor","password":"13454","email":"lesson@ukr.net","id":"1"},
+{"name":"vasiliy","password":"lora","email":"vasiliy@uk.net","id":"2"}
+]
