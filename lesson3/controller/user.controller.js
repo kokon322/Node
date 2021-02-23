@@ -27,7 +27,7 @@ module.exports = {
             const {userId} = req.params;
             await userService.deleteUserById(userId);
             res.json('user deleted');
-        }catch (err) {
+        } catch (err) {
             console.log(err);
         }
     }
