@@ -6,11 +6,22 @@ module.exports = {
         res.json(allUsers);
     },
     getUserById: async (req, res) => {
-        const {userId} = req.params;
-        const userWithId = await userService.getUserById(userId);
-        res.json(userWithId);
+        try {
+            const {userId} = req.params;
+            const userWithId = await userService.getUserById(userId);
+            res.json(userWithId);
+        } catch (e) {
+            console.log(e);
+        }
     },
-    createUser: (req, res) => {
-        res.json('user is create');
+    createUser: async (req, res) => {
+        try {
+            await userService.createUser(req.body);
+            res.json('User create');
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    deleteUserById: async (req, res) => {
     }
 }
