@@ -14,7 +14,7 @@ module.exports = {
             }
             next();
         } catch (err) {
-            res.json(err.message);
+            res.status(400).json(err.message);
         }
     },
     isThisIdInDB: async (req, res, next) => {
@@ -30,7 +30,7 @@ module.exports = {
             }
             next();
         } catch (err) {
-            res.json(err.message);
+            res.status(400).json(err.message);
         }
     },
     isUserValid: async (req, res, next) => {
@@ -47,7 +47,7 @@ module.exports = {
             }
             next();
         } catch (err) {
-            res.json(err.message);
+            res.status(400).json(err.message);
         }
     }
 }
