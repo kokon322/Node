@@ -1,7 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const {promisify} = require('util');
+const errorCodes = require('../constant/errorCodes.enum');
+const errorMessages = require('../constant/errorMessages.enum');
+
 const readFile = promisify(fs.readFile);
+
 
 const pathToDB = path.join(process.cwd(), 'lesson3', 'dataBase', 'users.txt');
 
@@ -10,11 +14,11 @@ module.exports = {
         try {
             const userId = +req.params.userId;
             if (userId < 0 || !Number.isInteger(userId) || Number.isNaN(userId)) {
-                throw new Error('Not Valid id');
+                throw new Error(errorMessages.idIsNotValid);
             }
             next();
         } catch (err) {
-            res.status(400).json(err.message);
+            res.status(errorCodes.BAD_REQUEST).json(err.message);
         }
     },
     isThisIdInDB: async (req, res, next) => {
@@ -26,11 +30,11 @@ module.exports = {
                 return +user.id === userId;
             });
             if (!result) {
-                throw new Error('We are do not found user with this ID');
+                throw new Error(errorMessages.notUserWithId);
             }
             next();
         } catch (err) {
-            res.status(400).json(err.message);
+            res.status(errorCodes.BAD_REQUEST).json(err.message);
         }
     },
     isUserValid: async (req, res, next) => {
@@ -43,11 +47,11 @@ module.exports = {
             });
             if (result || name.length < 1 || name.length > 20 || Number.isInteger(name) || password.length < 5 ||
                 email.length < 10 || email.length > 50 || !email.includes('@')) {
-                throw new Error('User is not valid');
+                throw new Error(errorMessages.userIsNotValid);
             }
             next();
         } catch (err) {
-            res.status(400).json(err.message);
+            res.status(errorCodes.BAD_REQUEST).json(err.message);
         }
     }
 }
