@@ -15,6 +15,8 @@ module.exports = {
             return e;
         }
     },
+
+
     getUserById: async (id) => {
         try {
             const data = await readFile(pathToDB);
@@ -28,6 +30,8 @@ module.exports = {
             return e;
         }
     },
+
+
     createUser: async (user) => {
         try {
             const data = await readFile(pathToDB);
@@ -41,8 +45,9 @@ module.exports = {
         } catch (e) {
             return e;
         }
-
     },
+
+
     deleteUserById: async (id) => {
         try {
             const data = await readFile(pathToDB);

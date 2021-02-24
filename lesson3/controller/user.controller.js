@@ -8,6 +8,7 @@ module.exports = {
         res.json(allUsers);
     },
 
+
     getUserById: async (req, res) => {
         try {
             const {userId} = req.params;
@@ -19,6 +20,7 @@ module.exports = {
         }
     },
 
+
     createUser: async (req, res) => {
         try {
             await userService.createUser(req.body);
@@ -28,6 +30,7 @@ module.exports = {
             res.json(e.message);
         }
     },
+
 
     deleteUserById: async (req, res) => {
         try {
