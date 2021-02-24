@@ -8,58 +8,41 @@ const pathToDB = path.join(process.cwd(), 'lesson3', 'dataBase', 'users.txt');
 
 module.exports = {
     getAllUsers: async () => {
-        try {
-            const allUsers = await readFile(pathToDB);
+        const allUsers = await readFile(pathToDB);
 
-            return JSON.parse(allUsers.toString());
-        } catch (e) {
-            return e;
-        }
+        return JSON.parse(allUsers.toString());
     },
 
 
     getUserById: async (id) => {
-        try {
-            const data = await readFile(pathToDB);
+        const data = await readFile(pathToDB);
 
-            const allUsers = JSON.parse(data.toString());
+        const allUsers = JSON.parse(data.toString());
 
-            return allUsers.filter(user => +user.id === +id);
-
-        } catch (e) {
-            return e;
-        }
+        return allUsers.filter(user => +user.id === +id);
     },
 
 
     createUser: async (user) => {
-        try {
-            const data = await readFile(pathToDB);
+        const data = await readFile(pathToDB);
 
-            const allUsers = JSON.parse(data.toString());
+        const allUsers = JSON.parse(data.toString());
 
-            user.id = allUsers.length + 1;
+        user.id = allUsers.length + 1;
 
-            allUsers.push(user);
+        allUsers.push(user);
 
-            await writeFile(pathToDB, JSON.stringify(allUsers));
-        } catch (e) {
-            return e;
-        }
+        await writeFile(pathToDB, JSON.stringify(allUsers));
     },
 
 
     deleteUserById: async (id) => {
-        try {
-            const data = await readFile(pathToDB);
+        const data = await readFile(pathToDB);
 
-            const allUsers = JSON.parse(data.toString());
+        const allUsers = JSON.parse(data.toString());
 
-            const resultArrayUsers = allUsers.filter(user => +user.id !== +id);
+        const resultArrayUsers = allUsers.filter(user => +user.id !== +id);
 
-            await writeFile(pathToDB, JSON.stringify(resultArrayUsers));
-        } catch (e) {
-            return e;
-        }
+        await writeFile(pathToDB, JSON.stringify(resultArrayUsers));
     }
 }
