@@ -10,6 +10,7 @@ module.exports = {
     getAllUsers: async () => {
         try {
             const allUsers = await readFile(pathToDB);
+
             return JSON.parse(allUsers.toString());
         } catch (e) {
             return e;
@@ -20,11 +21,10 @@ module.exports = {
     getUserById: async (id) => {
         try {
             const data = await readFile(pathToDB);
-            let allUsers = JSON.parse(data.toString());
 
-            return allUsers.filter(user => {
-                return +user.id === +id;
-            });
+            const allUsers = JSON.parse(data.toString());
+
+            return allUsers.filter(user => +user.id === +id);
 
         } catch (e) {
             return e;
@@ -35,7 +35,8 @@ module.exports = {
     createUser: async (user) => {
         try {
             const data = await readFile(pathToDB);
-            let allUsers = JSON.parse(data.toString());
+
+            const allUsers = JSON.parse(data.toString());
 
             user.id = allUsers.length + 1;
 
@@ -51,11 +52,10 @@ module.exports = {
     deleteUserById: async (id) => {
         try {
             const data = await readFile(pathToDB);
-            let allUsers = JSON.parse(data.toString());
 
-            const resultArrayUsers = allUsers.filter(user => {
-                return +user.id !== +id;
-            });
+            const allUsers = JSON.parse(data.toString());
+
+            const resultArrayUsers = allUsers.filter(user => +user.id !== +id);
 
             await writeFile(pathToDB, JSON.stringify(resultArrayUsers));
         } catch (e) {

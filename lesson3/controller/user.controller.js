@@ -12,6 +12,7 @@ module.exports = {
     getUserById: async (req, res) => {
         try {
             const {userId} = req.params;
+
             const userWithId = await userService.getUserById(userId);
 
             res.json(userWithId);
@@ -35,6 +36,7 @@ module.exports = {
     deleteUserById: async (req, res) => {
         try {
             const {userId} = req.params;
+
             await userService.deleteUserById(userId);
 
             res.json('user deleted');

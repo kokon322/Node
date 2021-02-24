@@ -29,12 +29,12 @@ module.exports = {
     isThisIdInDB: async (req, res, next) => {
         try {
             const userId = +req.params.userId;
+
             const data = await readFile(pathToDB);
+
             const allUsers = JSON.parse(data.toString());
 
-            const result = allUsers.some(user => {
-                return +user.id === userId;
-            });
+            const result = allUsers.some(user => +user.id === userId);
 
             if (!result) {
                 throw new Error(errorMessages.NO_USER_WITH_THIS_ID['en']);
@@ -50,12 +50,12 @@ module.exports = {
     isUserValid: async (req, res, next) => {
         try {
             const {name, password, email} = req.body;
+
             const data = await readFile(pathToDB);
+
             const allUsers = JSON.parse(data.toString());
 
-            const result = allUsers.some(user => {
-                return user.email === req.body.email;
-            });
+            const result = allUsers.some(user => user.email === req.body.email);
 
             if (result || name.length < 1 || name.length > 20 || Number.isInteger(name) || password.length < 5 ||
                 email.length < 10 || email.length > 50 || !email.includes('@')) {
