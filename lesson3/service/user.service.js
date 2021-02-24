@@ -12,29 +12,34 @@ module.exports = {
             const allUsers = await readFile(pathToDB);
             return JSON.parse(allUsers.toString());
         } catch (e) {
-            console.log(e);
+            return e;
         }
     },
     getUserById: async (id) => {
         try {
             const data = await readFile(pathToDB);
             let allUsers = JSON.parse(data.toString());
+
             return allUsers.filter(user => {
                 return +user.id === +id;
             });
-        } catch (err) {
-            console.log(err);
+
+        } catch (e) {
+            return e;
         }
     },
     createUser: async (user) => {
         try {
             const data = await readFile(pathToDB);
             let allUsers = JSON.parse(data.toString());
+
             user.id = allUsers.length + 1;
+
             allUsers.push(user);
+
             await writeFile(pathToDB, JSON.stringify(allUsers));
-        } catch (err) {
-            console.log(err);
+        } catch (e) {
+            return e;
         }
 
     },
@@ -42,12 +47,14 @@ module.exports = {
         try {
             const data = await readFile(pathToDB);
             let allUsers = JSON.parse(data.toString());
+
             const resultArrayUsers = allUsers.filter(user => {
                 return +user.id !== +id;
             });
+
             await writeFile(pathToDB, JSON.stringify(resultArrayUsers));
-        } catch (err) {
-            console.log(err);
+        } catch (e) {
+            return e;
         }
     }
 }
