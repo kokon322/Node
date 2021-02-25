@@ -6,12 +6,12 @@ const path = require('path');
 const readFile = promisify(fs.readFile);
 // const writeFile = promisify(fs.writeFile);
 
-const pathToDbUsers = path.join(__dirname, 'newDataBase', 'users.txt');
+const pathToDbUsers = path.join(process.cwd(), 'lesson3_2', 'newDataBase', 'users.txt');
 
 module.exports = {
     getAllUserFromDb: async () => {
-        const allUsers = await readFile(pathToDbUsers);
+        const data = await readFile(pathToDbUsers);
 
-        return allUsers;
+        return JSON.parse(data.toString());
     }
 };
