@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const {promisify} = require('util');
+const { promisify } = require('util');
+
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 
@@ -13,15 +14,13 @@ module.exports = {
         return JSON.parse(allUsers.toString());
     },
 
-
     getUserById: async (id) => {
         const data = await readFile(pathToDB);
 
         const allUsers = JSON.parse(data.toString());
 
-        return allUsers.filter(user => +user.id === +id);
+        return allUsers.filter((user) => +user.id === +id);
     },
-
 
     createUser: async (user) => {
         const data = await readFile(pathToDB);
@@ -35,14 +34,13 @@ module.exports = {
         await writeFile(pathToDB, JSON.stringify(allUsers));
     },
 
-
     deleteUserById: async (id) => {
         const data = await readFile(pathToDB);
 
         const allUsers = JSON.parse(data.toString());
 
-        const resultArrayUsers = allUsers.filter(user => +user.id !== +id);
+        const resultArrayUsers = allUsers.filter((user) => +user.id !== +id);
 
         await writeFile(pathToDB, JSON.stringify(resultArrayUsers));
     }
-}
+};

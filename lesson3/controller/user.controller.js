@@ -8,10 +8,9 @@ module.exports = {
         res.json(allUsers);
     },
 
-
     getUserById: async (req, res) => {
         try {
-            const {userId} = req.params;
+            const { userId } = req.params;
 
             const userWithId = await userService.getUserById(userId);
 
@@ -20,7 +19,6 @@ module.exports = {
             res.json(e.message);
         }
     },
-
 
     createUser: async (req, res) => {
         try {
@@ -32,10 +30,9 @@ module.exports = {
         }
     },
 
-
     deleteUserById: async (req, res) => {
         try {
-            const {userId} = req.params;
+            const { userId } = req.params;
 
             await userService.deleteUserById(userId);
 
@@ -44,4 +41,4 @@ module.exports = {
             res.json(e.message);
         }
     }
-}
+};

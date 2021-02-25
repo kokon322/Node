@@ -11,4 +11,4 @@ module.exports = {
         en: 'No user with this id',
         ua: 'Юзера з таким айді не знайдено'
     }
-}
+};
