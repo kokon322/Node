@@ -9,6 +9,4 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/', apiRouter);
 
-app.listen(5000, () => {
-    console.log('server work');
-});
+app.listen('5000', () => console.log('server is work'));

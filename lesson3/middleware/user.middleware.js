@@ -10,7 +10,7 @@ const pathToDB = path.join(process.cwd(), 'lesson3', 'dataBase', 'users.txt');
 
 module.exports = {
 
-    checkIsIdValid: async (req, res, next) => {
+    checkIsIdValid: (req, res, next) => {
         try {
             const userId = +req.params.userId;
 

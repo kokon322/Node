@@ -1,0 +1,3 @@
+[{"name":"Igor","password":"124125","email":"igor@ukr.net","id":0},
+{"name":"Marina","password":"124125","email":"marina@ukr.net","id":1},
+{"name":"Evgen","password":"13213145","email":"evgen@ukr.net","id":3}]
