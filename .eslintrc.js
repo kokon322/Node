@@ -28,6 +28,7 @@ module.exports = {
         complexity: 'error',
         'constructor-super': 'error',
         camelcase: 'off',
+        'arrow-parens': 0,
         curly: 'error',
         'default-case': 'off',
         'no-case-declarations': 'off',

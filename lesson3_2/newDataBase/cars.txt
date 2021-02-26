@@ -1,5 +1,0 @@
-[
-{"model":"outback","year":"2017","producer":"subaru"},
-{"model":"320","year":"2014","producer":"bmw"},
-{"model":"land Cruiser","year":"2020","producer":"toyota"}
-]
