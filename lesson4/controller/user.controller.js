@@ -11,15 +11,16 @@ module.exports = {
     },
     createUser: async (req, res) => {
         try {
-            const result = await userService.createUserInDb();
-            res.json(result);
+            await userService.createUserInDb(req.body);
+            res.json('user create');
         } catch (err) {
             res.json(err.message);
         }
     },
     deleteUser: async (req, res) => {
         try {
-            const result = await userService.deleteUser();
+            console.log(req.query);
+            const result = await userService.deleteUser(req.query);
             res.json(result);
         } catch (err) {
             res.json(err.message);
