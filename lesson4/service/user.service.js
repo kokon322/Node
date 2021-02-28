@@ -1,9 +1,19 @@
 const User = require('../dataBase/models/User');
 
 module.exports = {
-    getAllUsersFromDb: () => User.find(),
-    createUserInDb: (user) => User.create(user),
-    deleteUser: (id) => User.deleteOne({ _id: id.id }, (err) => {
-        console.log(err);
-    })
+    createUserInDb: async (user) => {
+        await User.create(user);
+    },
+
+    getUsersFromDb: async (query) => {
+        await User.find(query);
+    },
+
+    updateUser: async (query, body) => {
+        await User.updateOne(query, body);
+    },
+
+    deleteUser: async (query) => {
+        await User.findOneAndRemove(query);
+    }
 };
