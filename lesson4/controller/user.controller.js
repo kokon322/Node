@@ -25,9 +25,7 @@ module.exports = {
 
     updateUser: async (req, res) => {
         try {
-            const { body, query } = req;
-
-            await userService.updateUser(query, body);
+            await userService.updateUser(req.query, req.body);
 
             res.json(successCode.userUpdate);
         } catch (err) {

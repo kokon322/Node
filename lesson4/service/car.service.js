@@ -1,5 +1,20 @@
+const Car = require('../dataBase/models/Car');
+
 module.exports = {
-    getAllCarFromDb: () => 'get car from db',
-    createCarToDb: () => 'car is created',
-    deleteCarFromDb: () => 'car is deleted'
+    createCarToDb: async (car) => {
+        await Car.create(car);
+    },
+
+    getCarFromDb: async (query) => {
+        const cars = await Car.find(query);
+        return cars;
+    },
+
+    updateCar: async (query, body) => {
+        await Car.updateOne(query, body);
+    },
+
+    deleteCarFromDb: async (query) => {
+        await Car.deleteOne(query);
+    }
 };
