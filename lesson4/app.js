@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const pathToDB = require('./constant/dataBase');
+
 const apiRouter = require('./router/api.router');
 
 const app = express();
@@ -10,7 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 
 const port = 5000;
 
-// eslint-disable-next-line no-use-before-define
 _connectDB();
 
 app.use('/', apiRouter);
@@ -20,7 +21,7 @@ app.listen(port, () => {
 });
 
 function _connectDB() {
-    mongoose.connect('mongodb://localhost/homeWork2021', { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(pathToDB.nameDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
     const { connection } = mongoose;
 

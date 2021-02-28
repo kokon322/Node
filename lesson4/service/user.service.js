@@ -6,7 +6,8 @@ module.exports = {
     },
 
     getUsersFromDb: async (query) => {
-        await User.find(query);
+        const users = await User.find(query);
+        return users;
     },
 
     updateUser: async (query, body) => {
