@@ -2,15 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const pathToDB = require('./constant/dataBase');
-
 const apiRouter = require('./router/api.router');
+const { port } = require('./constant/api.port');
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-const port = 5000;
 
 _connectDB();
 
