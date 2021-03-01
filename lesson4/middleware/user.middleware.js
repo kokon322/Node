@@ -18,13 +18,9 @@ module.exports = {
     },
     isUserWithThisEmail: async (req, res, next) => {
         try {
-            const allUsers = await User.find();
+            const allUsers = await User.find(req.body);
 
-            const { email } = req.body;
-
-            const result = allUsers.some(user => user.email === email);
-
-            if (result) {
+            if (allUsers.length >= 0) {
                 throw new Error(userErrorMessage.USER_WITH_THIS_EMAIL);
             }
 
@@ -33,15 +29,11 @@ module.exports = {
             res.json(err.message);
         }
     },
-    haveThisEmail: async (req, res, next) => {
+    isUserRegister: async (req, res, next) => {
         try {
-            const allUsers = await User.find();
+            const allUsers = await User.find(req.body);
 
-            const { email } = req.body;
-
-            const result = allUsers.some(user => user.email === email);
-
-            if (!result) {
+            if (allUsers.length <= 0) {
                 throw new Error(userErrorMessage.DONT_HAVE_USER_WITH_EMAIL);
             }
 

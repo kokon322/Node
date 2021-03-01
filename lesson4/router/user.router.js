@@ -3,9 +3,10 @@ const userMiddleware = require('../middleware/user.middleware');
 
 const userController = require('../controller/user.controller');
 
-router.get('/', userController.getUsers)
+router
+    .get('/', userController.getUsers)
     .post('/', userMiddleware.isUserWithThisEmail, userMiddleware.isUserValid, userController.createUser)
-    .put('/', userMiddleware.haveThisEmail, userMiddleware.isUserValid, userController.updateUser)
+    .put('/', userMiddleware.isUserRegister, userMiddleware.isUserValid, userController.updateUser)
     .delete('/', userController.deleteUser);
 
 module.exports = router;

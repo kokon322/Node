@@ -1,20 +1,12 @@
 const User = require('../dataBase/models/User');
+require('../dataBase/models/Car');
 
 module.exports = {
-    createUserInDb: async (user) => {
-        await User.create(user);
-    },
+    createUserInDb: (user) => User.create(user),
 
-    getUsersFromDb: async (query) => {
-        const users = await User.find(query);
-        return users;
-    },
+    getUsersFromDb: (query) => User.find(query),
 
-    updateUser: async (query, body) => {
-        await User.updateOne(query, body);
-    },
+    updateUser: (query, body) => User.updateOne(query, body),
 
-    deleteUser: async (query) => {
-        await User.findOneAndRemove(query);
-    }
+    deleteUser: (query) => User.findOneAndRemove(query)
 };

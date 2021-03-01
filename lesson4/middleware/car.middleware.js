@@ -21,10 +21,9 @@ module.exports = {
     },
     isCarInDB: async (req, res, next) => {
         try {
-            const allCar = await Car.find();
-            const result = allCar.some(car => car.producer === req.body.producer);
+            const allCar = await Car.find(req.body);
 
-            if (!result) {
+            if (allCar.length <= 0) {
                 throw new Error(carErrorMessage.CAR_NOT_IN_DB);
             }
 
