@@ -1,11 +1,12 @@
 const carService = require('../service/car.service');
+const carSuccessCode = require('../constant/carSuccessCodes.enum');
 
 module.exports = {
     createCar: async (req, res) => {
         try {
             await carService.createCarToDb(req.body);
 
-            res.json('car create');
+            res.json(carSuccessCode.carIsCreated);
         } catch (err) {
             res.json(err.message);
         }
@@ -25,7 +26,7 @@ module.exports = {
         try {
             await carService.updateCar(req.query, req.body);
 
-            res.json('Car updated');
+            res.json(carSuccessCode.carIsUpdated);
         } catch (err) {
             res.json(err.message);
         }
@@ -35,7 +36,7 @@ module.exports = {
         try {
             await carService.deleteCarFromDb(req.query);
 
-            res.json('Car deleted');
+            res.json(carSuccessCode.carIsDeleted);
         } catch (err) {
             res.json(err.message);
         }
