@@ -1,7 +1,10 @@
 const router = require('express').Router();
+
 const {
-    createNewCar, readCar, updateOneCar, deleteOneCar
-} = require('../controller/car.controller');
+    carController: {
+        createNewCar, readCar, updateOneCar, deleteOneCar
+    }
+} = require('../controller');
 
 router
     .post('/', createNewCar)

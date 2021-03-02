@@ -1,9 +1,13 @@
-const userService = require('../service/user.service');
+const {
+    userService: {
+        createNewUser, readUser, updateOneUser, deleteOneUser
+    }
+} = require('../service');
 
 module.exports = {
     createNewUser: async (req, res) => {
         try {
-            await userService.createNewUser(req.body);
+            await createNewUser(req.body);
             res.json('user created');
         } catch (err) {
             res.json(err.message);
@@ -12,7 +16,7 @@ module.exports = {
 
     readUser: async (req, res) => {
         try {
-            const users = await userService.readUser(req.query);
+            const users = await readUser(req.query);
             res.json(users);
         } catch (err) {
             res.json(err.message);
@@ -21,7 +25,7 @@ module.exports = {
 
     updateOneUser: async (req, res) => {
         try {
-            await userService.updateOneUser(req.query, req.body);
+            await updateOneUser(req.query, req.body);
             res.json('user updated');
         } catch (err) {
             res.json(err.message);
@@ -30,7 +34,7 @@ module.exports = {
 
     deleteOneUser: async (req, res) => {
         try {
-            await userService.deleteOneUser(req.query);
+            await deleteOneUser(req.query);
             res.json('user deleted');
         } catch (err) {
             res.json(err.message);

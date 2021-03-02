@@ -1,4 +1,4 @@
-const User = require('../dataBase/model/User');
+const { User } = require('../dataBase/model');
 
 module.exports = {
     createNewUser: (body) => User.create(body),
