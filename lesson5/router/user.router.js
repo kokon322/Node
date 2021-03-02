@@ -6,8 +6,10 @@ const {
     }
 } = require('../controller');
 
+const { userMiddleware: { isUserValid } } = require('../middleware');
+
 router
-    .post('/', createNewUser)
+    .post('/', isUserValid, createNewUser)
     .get('/', readUser)
     .put('/', updateOneUser)
     .delete('/', deleteOneUser);

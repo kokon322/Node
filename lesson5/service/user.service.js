@@ -7,5 +7,5 @@ module.exports = {
 
     updateOneUser: (query, body) => User.updateOne(query, body),
 
-    deleteOneUser: (query) => User.deleteOne(query)
+    deleteOneUser: (query) => User.findOneAndDelete(query)
 };

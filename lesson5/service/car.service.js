@@ -7,5 +7,5 @@ module.exports = {
 
     updateOneCar: (query, body) => Car.updateOne(query, body),
 
-    deleteOneCar: (query) => Car.deleteOne(query)
+    deleteOneCar: (query) => Car.findOneAndDelete(query)
 };

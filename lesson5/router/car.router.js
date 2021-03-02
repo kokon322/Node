@@ -6,8 +6,10 @@ const {
     }
 } = require('../controller');
 
+const { carMiddleware: { isCarValid } } = require('../middleware');
+
 router
-    .post('/', createNewCar)
+    .post('/', isCarValid, createNewCar)
     .get('/', readCar)
     .put('/', updateOneCar)
     .delete('/', deleteOneCar);

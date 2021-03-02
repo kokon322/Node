@@ -34,8 +34,8 @@ module.exports = {
 
     deleteOneUser: async (req, res) => {
         try {
-            await deleteOneUser(req.query);
-            res.json('user deleted');
+            const result = await deleteOneUser(req.query);
+            res.json(result);
         } catch (err) {
             res.json(err.message);
         }
