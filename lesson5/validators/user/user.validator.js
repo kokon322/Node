@@ -7,7 +7,8 @@ module.exports = Joi.object({
         .required(),
     lastName: Joi.string().alphanum().min(2).max(50)
         .required(),
-    age: Joi.number().min(18).max(110).required(),
+    age: Joi.number().integer().min(18).max(110)
+        .required(),
     email: Joi.string().regex(EMAIL_REGEXP).required(),
     password: Joi.string().regex(PASSWORD_REGEXP).required()
 });
