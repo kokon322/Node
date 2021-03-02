@@ -1,7 +1,7 @@
 const Car = require('../dataBase/model/Car');
 
 module.exports = {
-    createNewCar: (car) => Car.create(car),
+    createNewCar: (body) => Car.create(body),
 
     readCar: (query) => Car.find(query),
 
