@@ -6,6 +6,8 @@ const {
 
 const { passWordHash: { hash } } = require('../helpers');
 
+const { userSuccessMessage: { USER_CREATED, USER_UPDATED, USER_DELETED } } = require('../constant');
+
 module.exports = {
     createNewUser: async (req, res) => {
         try {
@@ -15,7 +17,7 @@ module.exports = {
 
             await createNewUser({ ...req.body, password: hashPassword });
 
-            res.json('user created');
+            res.json(USER_CREATED);
         } catch (err) {
             res.json(err.message);
         }
@@ -35,7 +37,7 @@ module.exports = {
         try {
             await updateOneUser(req.query, req.body);
 
-            res.json('user updated');
+            res.json(USER_UPDATED);
         } catch (err) {
             res.json(err.message);
         }
@@ -43,8 +45,9 @@ module.exports = {
 
     deleteOneUser: async (req, res) => {
         try {
-            const result = await deleteOneUser(req.query);
-            res.json(result);
+            await deleteOneUser(req.query);
+
+            res.json(USER_DELETED);
         } catch (err) {
             res.json(err.message);
         }

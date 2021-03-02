@@ -1,5 +1,6 @@
 const { userValidators: { createUserValidator, searchQuery } } = require('../validators');
 const { User } = require('../dataBase/model');
+const { userErrorMessages: { NO_REGISTRATION, USER_IN_DB } } = require('../constant');
 
 module.exports = {
     isUserValid: async (req, res, next) => {
@@ -36,7 +37,7 @@ module.exports = {
             const allUsers = await User.find({ email });
 
             if (allUsers.length <= 0) {
-                throw new Error('User is not registration');
+                throw new Error(NO_REGISTRATION);
             }
 
             next();
@@ -51,7 +52,7 @@ module.exports = {
             const allUsers = await User.find({ email });
 
             if (allUsers.length >= 0) {
-                throw new Error('User with this email regist');
+                throw new Error(USER_IN_DB);
             }
 
             next();
