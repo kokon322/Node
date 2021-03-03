@@ -12,18 +12,4 @@ userSchema.virtual('fullName').get(function() {
     return `${this.firstName} ${this.lastName}`;
 });
 
-userSchema.virtual('userCars', {
-    ref: 'Car',
-    localField: 'cars',
-    foreignField: '_id'
-});
-
-userSchema
-    .pre('find', function() {
-        this.populate('userCars');
-    })
-    .pre('findOne', function() {
-        this.populate('userCars');
-    });
-
 module.exports = model('User', userSchema);
