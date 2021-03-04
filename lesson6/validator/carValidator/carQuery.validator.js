@@ -5,18 +5,16 @@ module.exports = Joi.object({
         .string()
         .alphanum()
         .min(2)
-        .max(50)
-        .required(),
+        .max(50),
     model: Joi
         .string()
         .alphanum()
-        .min(2)
-        .max(50)
-        .required(),
+        .min(1)
+        .max(50),
     year: Joi
         .number()
-        .integer()
         .positive()
+        .integer()
         .min(1950)
         .max(2021)
 });
