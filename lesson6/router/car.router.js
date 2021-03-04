@@ -6,10 +6,12 @@ const {
     }
 } = require('../controller');
 
+const { carMiddleware: { isQueryValid, isCarValid } } = require('../middleware');
+
 router
-    .post('/', createCar)
-    .get('/', readCar)
-    .put('/', updateCar)
-    .delete('/', deleteCar);
+    .post('/', isQueryValid, isCarValid, createCar)
+    .get('/', isQueryValid, readCar)
+    .put('/', isQueryValid, isCarValid, updateCar)
+    .delete('/', isQueryValid, deleteCar);
 
 module.exports = router;

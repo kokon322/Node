@@ -6,10 +6,12 @@ const {
     }
 } = require('../controller');
 
+const { userMiddleware: { isQueryValid, isUserValid, isUserRegistration } } = require('../middleware');
+
 router
-    .post('/', createUser)
-    .get('/', readUser)
-    .put('/', updateUser)
-    .delete('/', deleteUser);
+    .post('/', isQueryValid, isUserValid, createUser)
+    .get('/', isQueryValid, readUser)
+    .put('/', isQueryValid, isUserRegistration, updateUser)
+    .delete('/', isQueryValid, isUserRegistration, deleteUser);
 
 module.exports = router;
