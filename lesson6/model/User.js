@@ -5,6 +5,6 @@ const userSchema = new Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     age: { type: Number, required: true }
-});
+}, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
 
 module.exports = model('User', userSchema);

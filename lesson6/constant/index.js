@@ -1,3 +1,4 @@
 module.exports = {
-    REGEXP: require('./regexp.enum')
+    REGEXP: require('./regexp.enum'),
+    CONSTANT: require('./constant')
 };

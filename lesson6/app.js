@@ -1,9 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 const apiRouter = require('./router/api.router');
+const { PORT, MONGO_URL } = require('./config/config');
 
 const app = express();
+
+dotenv.config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -12,12 +16,12 @@ _connectToDb();
 
 app.use('/', apiRouter);
 
-app.listen(5000, () => {
-    console.log('5000 work');
+app.listen(PORT, () => {
+    console.log('api work');
 });
 
 function _connectToDb() {
-    mongoose.connect('mongodb://localhost/homeWork2021', { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
     const { connection } = mongoose;
 
