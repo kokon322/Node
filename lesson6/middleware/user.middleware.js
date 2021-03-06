@@ -34,6 +34,7 @@ module.exports = {
     isUserRegistration: async (req, res, next) => {
         try {
             const user = await User.find(req.query);
+
             if (Object.keys(req.query).length === 0 || user.length <= 0) {
                 throw new ErrorHandler(USER_IS_NOT_PRESENT_IN_DB, 401);
             }
