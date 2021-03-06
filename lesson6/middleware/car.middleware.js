@@ -1,5 +1,6 @@
 const { carValidator: { carValidator, carQueryValidator } } = require('../validator');
 const { ERROR_MESSAGES: { CAR_IS_NOT_VALID, CAR_QUERY_IS_NOT_VALID } } = require('../constant');
+const { ErrorHandler } = require('../error');
 
 module.exports = {
     isCarValid: async (req, res, next) => {
@@ -7,12 +8,12 @@ module.exports = {
             const { error } = await carValidator.validate(req.body);
 
             if (error) {
-                throw new Error(CAR_IS_NOT_VALID);
+                throw new ErrorHandler(CAR_IS_NOT_VALID, 418);
             }
 
             next();
         } catch (err) {
-            res.json(err.message);
+            next(err);
         }
     },
 
@@ -21,12 +22,12 @@ module.exports = {
             const { error } = await carQueryValidator.validate(req.query);
 
             if (error) {
-                throw new Error(CAR_QUERY_IS_NOT_VALID);
+                throw new ErrorHandler(CAR_QUERY_IS_NOT_VALID, 401);
             }
 
             next();
         } catch (err) {
-            res.json(err.message);
+            next(err);
         }
     }
 };
