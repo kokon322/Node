@@ -52,9 +52,11 @@ module.exports = {
 
     deleteUser: async (req, res) => {
         try {
-            const { email, name } = await deleteUser(req.query);
+            const user = await readUser(req.query);
 
-            await sendMail(email, EMAIL_ACTION.USER_DELETED, { userName: name });
+            await sendMail(user[0].email, EMAIL_ACTION.USER_DELETED, { userName: user[0].name });
+
+            await deleteUser(req.query);
 
             res.json(USER_DELETED);
         } catch (err) {

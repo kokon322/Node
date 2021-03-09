@@ -7,7 +7,7 @@ const templatesInfo = require('../email-templates');
 
 const templateParser = new EmailTemplates({
     views: {
-        root: path.join(process.cwd(), 'email-templates')
+        root: path.join(process.cwd(), 'lesson7', 'email-templates')
     }
 });
 
@@ -16,6 +16,9 @@ const transporter = mailer.createTransport({
     auth: {
         user: ROOT_EMAIL,
         pass: ROOT_EMAIL_PASSWORD
+    },
+    tls: {
+        rejectUnauthorized: false
     }
 });
 

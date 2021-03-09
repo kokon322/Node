@@ -1,4 +1,14 @@
 .footer {
-    border-radius: 50%;
     background-color: yellow;
+    font-size: 20px;
+    width: 350px;
+    height: 90px;
+    color: blue;
+}
+.header {
+    background-color: blue;
+    font-size: 20px;
+    width: 350px;
+    height: 90px;
+    color: yellow;
 }
