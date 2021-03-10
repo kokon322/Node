@@ -1,9 +1,11 @@
 const mailer = require('nodemailer');
 const EmailTemplates = require('email-templates');
 const path = require('path');
+const templatesInfo = require('../email-templates');
 
 const { ROOT_EMAIL, ROOT_EMAIL_PASSWORD } = require('../config/config');
-const templatesInfo = require('../email-templates');
+const { ErrorHandler } = require('../error');
+const { ERROR_MESSAGES: { WRONG_ACTION } } = require('../constant');
 
 const templateParser = new EmailTemplates({
     views: {
@@ -27,7 +29,7 @@ const sendMail = async (userMail, actions, context) => {
         const foundTemplate = templatesInfo[actions];
 
         if (!foundTemplate) {
-            throw new Error('Wrong action');
+            throw new ErrorHandler(WRONG_ACTION);
         }
 
         const html = await templateParser.render(foundTemplate.templateName, context);

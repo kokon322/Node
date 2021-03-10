@@ -7,5 +7,6 @@ module.exports = {
     TOKEN_IS_NOT_VALID: 'not valid token',
     AUTH_NO_USER: 'No user',
     CAR_IS_NOT_VALID: 'Car is not Valid',
-    CAR_QUERY_IS_NOT_VALID: 'Query is not Valid'
+    CAR_QUERY_IS_NOT_VALID: 'Query is not Valid',
+    WRONG_ACTION: 'Wrong action'
 };
