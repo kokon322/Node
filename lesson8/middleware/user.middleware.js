@@ -22,7 +22,7 @@ const isUserPresentForCreate = async (req, res, next) => {
         const result = await readUser({ email: req.body.email });
 
         if (result.length > 0) {
-            throw new ErrorHandler(ErrorMessage.USER_IS_NOT_PRESENT_IN_DB);
+            throw new ErrorHandler(ErrorMessage.USER_IS_IN_DB);
         }
 
         next();
