@@ -10,6 +10,9 @@ const { ErrorMessage: { WRONG_ACTION } } = require('../constants');
 const templateParser = new EmailTemplates({
     views: {
         root: path.join(process.cwd(), 'lesson8', 'email-templates')
+    },
+    tls: {
+        rejectUnauthorized: false
     }
 });
 
