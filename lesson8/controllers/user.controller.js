@@ -1,9 +1,14 @@
 const { userService } = require('../services');
 const { SuccessMessage } = require('../constants');
+const { passwordHesher: { hash } } = require('../helpers');
 
 const createUser = async (req, res, next) => {
     try {
-        await userService.createUser(req.body);
+        const { password } = req.body;
+
+        const hashPassword = await hash(password);
+
+        await userService.createUser({ ...req.body, password: hashPassword });
         res.json(SuccessMessage.USER_CREATED);
     } catch (e) {
         next(e);

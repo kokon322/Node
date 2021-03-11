@@ -16,6 +16,11 @@ _ConnectToDb();
 
 app.use('/', apiRouter);
 
+// eslint-disable-next-line no-unused-vars
+app.use('*', (err, req, res, next) => {
+    res.json(err.message);
+});
+
 app.listen(PORT, () => {
     console.log('5000 work');
 });
