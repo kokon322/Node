@@ -10,9 +10,6 @@ const { ErrorMessage: { WRONG_ACTION } } = require('../constants');
 const templateParser = new EmailTemplates({
     views: {
         root: path.join(process.cwd(), 'lesson8', 'email-templates')
-    },
-    tls: {
-        rejectUnauthorized: false
     }
 });
 
@@ -21,12 +18,15 @@ const transporter = mailer.createTransport({
     auth: {
         user: ROOT_EMAIL,
         pass: ROOT_EMAIL_PASSWORD
+    },
+    tls: {
+        rejectUnauthorized: false
     }
 });
 
-const sendMail = async (userMail, action, context) => {
+const sendMail = async (userMail, actions, context) => {
     try {
-        const foundTemplate = templatesInfo[action];
+        const foundTemplate = templatesInfo[actions];
 
         if (!foundTemplate) {
             throw new ErrorHandler(WRONG_ACTION);
