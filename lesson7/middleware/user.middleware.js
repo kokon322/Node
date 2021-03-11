@@ -17,6 +17,7 @@ module.exports = {
             next(err);
         }
     },
+
     isQueryValid: async (req, res, next) => {
         try {
             const { error } = await userQueryValidator.validate(req.query);

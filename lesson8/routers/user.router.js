@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
 const { userController } = require('../controllers');
-const { userMiddleware } = require('../middleware');
-const { authMiddleware } = require('../middleware');
+const { userMiddleware } = require('../middlewares');
+const { authMiddleware } = require('../middlewares');
 
 router
     .post('/', userMiddleware.isUserValid, userMiddleware.isUserPresentForCreate, userController.createUser);
