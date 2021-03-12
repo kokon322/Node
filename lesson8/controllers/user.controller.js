@@ -30,9 +30,11 @@ const readUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
     try {
-        await userService.updateUser(req.query, req.body);
+        const { email, name, password } = req.body;
 
-        const { email, name } = req.body;
+        const hashPassword = await hash(password);
+
+        await userService.updateUser(req.query, { ...req.body, password: hashPassword });
 
         await sendMail(email, USER_UPDATED, { userName: name });
         res.json(SuccessMessage.USER_UPDATED);
@@ -43,7 +45,7 @@ const updateUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
     try {
-        const user = await readUser(req.query);
+        const user = await userService.readUser(req.query);
 
         await sendMail(user[0].email, USER_DELETED, { userName: user[0].name });
 
