@@ -1,11 +1,15 @@
 const router = require('express').Router();
 
 const { userController } = require('../controllers');
-const { userMiddleware } = require('../middlewares');
-const { authMiddleware } = require('../middlewares');
+const { userMiddleware, authMiddleware, fileMiddleware } = require('../middlewares');
 
 router
-    .post('/', userMiddleware.isUserValid, userMiddleware.isUserPresentForCreate, userController.createUser);
+    .post('/',
+        fileMiddleware.checkFile,
+        fileMiddleware.checkIsPhotoOne,
+        userMiddleware.isUserValid,
+        userMiddleware.isUserPresentForCreate,
+        userController.createUser);
 
 router
     .use(authMiddleware.checkAccessToken, userMiddleware.isQueryForSearchValid, userMiddleware.isUserPresent)

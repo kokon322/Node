@@ -9,5 +9,7 @@ module.exports = {
     AUTH_NO_USER: 'No user',
     CAR_IS_NOT_VALID: 'Car is not Valid',
     CAR_QUERY_IS_NOT_VALID: 'Query is not Valid',
-    WRONG_ACTION: 'Wrong action'
+    WRONG_ACTION: 'Wrong action',
+    NOT_VALID_FILE: 'Not Valid File',
+    YOU_MAST_LOAD_ONE_PHOTO: 'You mast load only one photo'
 };

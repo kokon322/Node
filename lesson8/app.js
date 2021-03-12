@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const fileUpload = require('express-fileupload');
+const path = require('path');
 
 dotenv.config();
 
@@ -9,6 +11,8 @@ const apiRouter = require('./routers/api.router');
 
 const app = express();
 
+app.use(fileUpload());
+app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
