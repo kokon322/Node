@@ -26,7 +26,7 @@ app.use('*', (err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-    console.log('5000 work');
+    console.log(`${PORT} is work`);
 });
 
 function _ConnectToDb() {
