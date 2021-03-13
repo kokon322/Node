@@ -14,6 +14,7 @@ router
 router
     .use(authMiddleware.checkAccessToken, userMiddleware.isQueryForSearchValid, userMiddleware.isUserPresent)
     .get('/', userController.readUser)
+    .get('/oneUser', userController.getOneUser)
     .put('/', userMiddleware.isUserValid, userController.updateUser)
     .delete('/', userController.deleteUser);
 

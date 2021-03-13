@@ -2,7 +2,8 @@ const path = require('path');
 const uuid = require('uuid').v1;
 const fs = require('fs-extra').promises;
 
-const { carService: { updateCar } } = require('../services');
+const { updateCar } = require('../services/car.service');
+const { updateUser } = require('../services/user.service');
 
 const carFileHelper = async (docs, photos, car) => {
     if (photos.length > 0) {
@@ -55,6 +56,25 @@ const carFileHelper = async (docs, photos, car) => {
     }
 };
 
+const userFileHelper = async (avatar, user) => {
+    const pathToUserPhotos = path.join('user', `${user._id}`, 'photos');
+    const photoDir = path.join(process.cwd(), 'lesson8', 'static', pathToUserPhotos);
+
+    const fileExtension = avatar.name.split('.').pop();
+
+    const photoName = `${uuid()}.${fileExtension}`;
+
+    const finalPhotoPath = path.join(photoDir, photoName);
+
+    await fs.mkdir(photoDir, { recursive: true });
+    await avatar.mv(finalPhotoPath);
+
+    user.avatar = path.join(pathToUserPhotos, photoName);
+
+    await updateUser({ _id: user._id }, user);
+};
+
 module.exports = {
-    carFileHelper
+    carFileHelper,
+    userFileHelper
 };
