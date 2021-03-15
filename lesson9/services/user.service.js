@@ -1,35 +1,14 @@
 const { Models: { User } } = require('../dataBase');
+const { userQueryBuilder: { userQueryBuilders } } = require('../helpers/query-builder');
 
 const createUser = (user) => User.create(user);
 
-const readUsers = (query = {}) => {
+const readUsers = async (query = {}) => {
     const { limit = 20, page = 1, ...filters } = query;
 
-    const skip = (page - 1) * limit;
+    const result = await userQueryBuilders(limit, page, filters);
 
-    const keys = Object.keys(filters);
-    const filterObject = {};
-
-    keys.forEach(key => {
-        switch (key) {
-            case 'ageGte':
-                filterObject.age = { ...filterObject.age, $gte: filters.ageGte };
-                break;
-            case 'ageLte':
-                filterObject.age = { ...filterObject.age, $lte: filters.ageLte };
-                break;
-            case 'name':
-                filterObject.name = { $regex: filters.name, $options: 'i' };
-                break;
-            case 'email':
-                filterObject.email = { $regex: filters.email, $options: 'i' };
-                break;
-            default:
-                filterObject[key] = filters[key];
-        }
-    });
-
-    return User.find(filterObject).limit(limit).skip(skip);
+    return result;
 };
 
 const updateUser = (query, user) => User.updateOne(query, user);
