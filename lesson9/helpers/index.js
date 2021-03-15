@@ -1,5 +1,6 @@
 module.exports = {
     tokinizer: require('./tokinizer'),
     passwordHesher: require('./passwordHesher'),
-    fileHelper: require('./fileHelper')
+    fileHelper: require('./fileHelper'),
+    userQueryBuilder: require('./query-builder')
 };

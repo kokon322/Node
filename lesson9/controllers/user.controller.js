@@ -25,7 +25,8 @@ const createUser = async (req, res, next) => {
 
 const readUser = async (req, res, next) => {
     try {
-        const user = await userService.readUser(req.query);
+        const { query } = req;
+        const user = await userService.readUsers(query);
 
         res.json(user);
     } catch (e) {
@@ -52,7 +53,7 @@ const deleteUser = async (req, res, next) => {
     try {
         const { query } = req;
 
-        const user = await userService.readUser(query);
+        const user = await userService.getOneUser(query);
 
         await sendMail(user[0].email, USER_DELETED, { userName: user[0].name });
 

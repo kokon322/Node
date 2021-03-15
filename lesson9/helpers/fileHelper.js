@@ -9,7 +9,7 @@ const carFileHelper = async (docs, photos, car) => {
     if (photos.length > 0) {
         const pathToCarPhotos = path.join('car', `${car._id}`, 'photos');
 
-        const photoDir = path.join(process.cwd(), 'lesson8', 'static', pathToCarPhotos);
+        const photoDir = path.join(process.cwd(), 'lesson9', 'static', pathToCarPhotos);
 
         for (let i = 0; i < photos.length; i++) {
             const fileExtension = photos[i].name.split('.').pop();
@@ -33,7 +33,7 @@ const carFileHelper = async (docs, photos, car) => {
     if (docs.length > 0) {
         const pathToCarDocs = path.join('car', `${car._id}`, 'docs');
 
-        const docsDir = path.join(process.cwd(), 'lesson8', 'static', pathToCarDocs);
+        const docsDir = path.join(process.cwd(), 'lesson9', 'static', pathToCarDocs);
 
         for (let i = 0; i < docs.length; i++) {
             const fileExtension = docs[i].name.split('.').pop();
@@ -58,7 +58,7 @@ const carFileHelper = async (docs, photos, car) => {
 
 const userFileHelper = async (avatar, user) => {
     const pathToUserPhotos = path.join('user', `${user._id}`, 'photos');
-    const photoDir = path.join(process.cwd(), 'lesson8', 'static', pathToUserPhotos);
+    const photoDir = path.join(process.cwd(), 'lesson9', 'static', pathToUserPhotos);
 
     const fileExtension = avatar.name.split('.').pop();
 

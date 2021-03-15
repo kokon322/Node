@@ -1,4 +1,4 @@
-const { userService: { readUser } } = require('../services');
+const { userService: { getOneUser } } = require('../services');
 const { ErrorHandler } = require('../errors');
 const { userValidator, queryValidator } = require('../validators');
 const { ErrorMessage } = require('../constants');
@@ -19,9 +19,8 @@ const isUserValid = async (req, res, next) => {
 
 const isUserPresentForCreate = async (req, res, next) => {
     try {
-        const result = await readUser({ email: req.body.email });
-
-        if (result.length > 0) {
+        const result = await getOneUser({ email: req.body.email });
+        if (result) {
             throw new ErrorHandler(ErrorMessage.USER_IS_IN_DB);
         }
 
@@ -33,7 +32,7 @@ const isUserPresentForCreate = async (req, res, next) => {
 
 const isUserPresent = async (req, res, next) => {
     try {
-        const result = await readUser(req.query);
+        const result = await (req.query);
 
         if (result.length <= 0) {
             throw new ErrorHandler(ErrorMessage.USER_IS_NOT_PRESENT_IN_DB);
