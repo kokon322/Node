@@ -10,9 +10,12 @@ const deleteClient = (id) => getClientModel().destroy({ where: { idClient: id } 
 
 const getClientById = (id) => getClientModel().findByPk(id);
 
+const updateClientById = (updateClient, id) => getClientModel().update(updateClient, { where: { idClient: id } });
+
 module.exports = {
     createClient,
     findAllClients,
     deleteClient,
-    getClientById
+    getClientById,
+    updateClientById
 };

@@ -18,7 +18,7 @@ app.use('/', apiRouter);
 
 // eslint-disable-next-line no-unused-vars
 app.use('*', (err, req, res, next) => {
-    res.json(err.message);
+    res.status(err.status).json(err.message);
 });
 
 app.listen(PORT, () => {

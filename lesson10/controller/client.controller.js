@@ -34,7 +34,7 @@ const getClientById = (req, res, next) => {
 
 const deleteClient = async (req, res, next) => {
     try {
-        const { Id } = req.params;
+        const { params: { Id } } = req;
 
         const result = await clientService.deleteClient(Id);
 
@@ -44,9 +44,22 @@ const deleteClient = async (req, res, next) => {
     }
 };
 
+const updateClient = async (req, res, next) => {
+    try {
+        const { params: { Id }, body } = req;
+        console.log(Id);
+        console.log(body);
+        await clientService.updateClientById(body, Id);
+        res.json('client update');
+    } catch (err) {
+        next(err);
+    }
+};
+
 module.exports = {
     createClient,
     getAllClients,
     deleteClient,
-    getClientById
+    getClientById,
+    updateClient
 };

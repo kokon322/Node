@@ -1,4 +1,5 @@
 const { clientService } = require('../service');
+const { ErrorHandler, Error: { NOT_PRESENT_IN_DB } } = require('../error');
 
 const isClientWithIdRegistered = async (req, res, next) => {
     try {
@@ -7,7 +8,7 @@ const isClientWithIdRegistered = async (req, res, next) => {
         const client = await clientService.getClientById(Id);
 
         if (!client) {
-            throw new Error('Client with this id is not present in DB');
+            throw new ErrorHandler(NOT_PRESENT_IN_DB.message, NOT_PRESENT_IN_DB.status);
         }
         req.client = client;
         next();

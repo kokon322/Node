@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const {
     clientController: {
-        getAllClients, createClient, deleteClient, getClientById
+        getAllClients, createClient, deleteClient, getClientById, updateClient
     }
 } = require('../controller');
 
@@ -16,6 +16,7 @@ router
     .use('/:Id', isClientWithIdRegistered);
 
 router
+    .put('/:Id', updateClient)
     .get('/:Id', getClientById)
     .delete('/:Id', deleteClient);
 
