@@ -24,13 +24,9 @@ const getAllClients = async (req, res, next) => {
     }
 };
 
-const getClientById = async (req, res, next) => {
+const getClientById = (req, res, next) => {
     try {
-        const { Id } = req.params;
-
-        const client = await clientService.getClientById(Id);
-
-        res.json(client);
+        res.json(req.client);
     } catch (err) {
         next(err);
     }
@@ -38,9 +34,9 @@ const getClientById = async (req, res, next) => {
 
 const deleteClient = async (req, res, next) => {
     try {
-        const { query } = req;
+        const { Id } = req.params;
 
-        const result = await clientService.deleteClient(query);
+        const result = await clientService.deleteClient(Id);
 
         res.json(result);
     } catch (err) {

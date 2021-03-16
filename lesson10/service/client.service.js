@@ -6,7 +6,7 @@ const createClient = (client) => getClientModel().create(client);
 
 const findAllClients = (query) => getClientModel().findAll({ where: query });
 
-const deleteClient = (id) => getClientModel().destroy({ where: id });
+const deleteClient = (id) => getClientModel().destroy({ where: { idClient: id } });
 
 const getClientById = (id) => getClientModel().findByPk(id);
 

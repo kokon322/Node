@@ -6,10 +6,17 @@ const {
     }
 } = require('../controller');
 
+const { clientMiddleware: { isClientWithIdRegistered } } = require('../middleware');
+
 router
     .post('/', createClient)
-    .get('/', getAllClients)
+    .get('/', getAllClients);
+
+router
+    .use('/:Id', isClientWithIdRegistered);
+
+router
     .get('/:Id', getClientById)
-    .delete('/', deleteClient);
+    .delete('/:Id', deleteClient);
 
 module.exports = router;
