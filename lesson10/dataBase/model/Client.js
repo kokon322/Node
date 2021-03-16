@@ -3,8 +3,7 @@ module.exports = (client, DataTypes) => {
         {
             idClient: {
                 type: DataTypes.INTEGER,
-                primaryKey: true,
-                autoIncrement: true
+                primaryKey: true
             },
             FirstName: {
                 type: DataTypes.STRING,

@@ -1,13 +1,18 @@
 const db = require('../dataBase').getInstance();
 
-const findAllClients = () => {
-    const ClientModel = db.getModel('Client');
+const getClientModel = () => db.getModel('Client');
 
-    console.log(ClientModel);
+const createClient = (client) => getClientModel().create(client);
 
-    return ClientModel.findAll();
-};
+const findAllClients = (query) => getClientModel().findAll({ where: query });
+
+const deleteClient = (id) => getClientModel().destroy({ where: id });
+
+const getClientById = (id) => getClientModel().findByPk(id);
 
 module.exports = {
-    findAllClients
+    createClient,
+    findAllClients,
+    deleteClient,
+    getClientById
 };

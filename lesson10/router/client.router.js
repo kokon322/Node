@@ -1,8 +1,15 @@
 const router = require('express').Router();
 
-const { clientController: { getAllClients } } = require('../controller');
+const {
+    clientController: {
+        getAllClients, createClient, deleteClient, getClientById
+    }
+} = require('../controller');
 
 router
-    .get('/', getAllClients);
+    .post('/', createClient)
+    .get('/', getAllClients)
+    .get('/:Id', getClientById)
+    .delete('/', deleteClient);
 
 module.exports = router;
