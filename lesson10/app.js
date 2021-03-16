@@ -1,11 +1,11 @@
 const dotenv = require('dotenv');
 const express = require('express');
 
+dotenv.config();
+
 const { PORT } = require('./config/config');
 const apiRouter = require('./router/api.router');
 const db = require('./dataBase').getInstance();
-
-dotenv.config();
 
 const app = express();
 
