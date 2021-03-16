@@ -20,10 +20,13 @@
     "mongoose": "^5.11.18",
     "nodemailer": "^6.5.0",
     "pug": "^3.0.2",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.5.1"
   },
   "devDependencies": {
     "@types/email-templates": "^8.0.2",
+    "@types/sequelize": "^4.28.9",
     "@types/nodemailer": "^6.4.0",
     "@types/express-fileupload": "^1.1.6",
     "eslint": "^7.14.0",
