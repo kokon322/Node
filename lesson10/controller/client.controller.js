@@ -1,4 +1,5 @@
 const { clientService } = require('../service');
+const { Success } = require('../error');
 
 const createClient = async (req, res, next) => {
     try {
@@ -6,7 +7,7 @@ const createClient = async (req, res, next) => {
 
         await clientService.createClient(body);
 
-        res.json(body);
+        res.status(Success.CLIENT_CREATED.status).json(Success.CLIENT_CREATED.message);
     } catch (err) {
         next(err);
     }
@@ -18,7 +19,7 @@ const getAllClients = async (req, res, next) => {
 
         const clients = await clientService.findAllClients(query);
 
-        res.json(clients);
+        res.status(200).json(clients);
     } catch (err) {
         next(err);
     }
@@ -26,7 +27,7 @@ const getAllClients = async (req, res, next) => {
 
 const getClientById = (req, res, next) => {
     try {
-        res.json(req.client);
+        res.status(200).json(req.client);
     } catch (err) {
         next(err);
     }
@@ -36,9 +37,9 @@ const deleteClient = async (req, res, next) => {
     try {
         const { params: { Id } } = req;
 
-        const result = await clientService.deleteClient(Id);
+        await clientService.deleteClient(Id);
 
-        res.json(result);
+        res.status(Success.CLIENT_DELETED.status).json(Success.CLIENT_DELETED.message);
     } catch (err) {
         next(err);
     }
@@ -47,10 +48,10 @@ const deleteClient = async (req, res, next) => {
 const updateClient = async (req, res, next) => {
     try {
         const { params: { Id }, body } = req;
-        console.log(Id);
-        console.log(body);
+
         await clientService.updateClientById(body, Id);
-        res.json('client update');
+
+        res.status(Success.CLIENT_UPDATED.status).json(Success.CLIENT_UPDATED.message);
     } catch (err) {
         next(err);
     }
