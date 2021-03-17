@@ -1,5 +1,6 @@
 const { clientService } = require('../service');
-const { ErrorHandler, Error: { NOT_PRESENT_IN_DB } } = require('../error');
+const { clientValidator } = require('../validator');
+const { ErrorHandler, Error: { NOT_PRESENT_IN_DB, CLIENT_IS_NOT_VALID } } = require('../error');
 
 const isClientWithIdRegistered = async (req, res, next) => {
     try {
@@ -17,6 +18,21 @@ const isClientWithIdRegistered = async (req, res, next) => {
     }
 };
 
+const isClientValid = async (req, res, next) => {
+    try {
+        const { error } = await clientValidator.validate(req.body);
+        console.log(error);
+        if (error) {
+            throw new ErrorHandler(CLIENT_IS_NOT_VALID.message, CLIENT_IS_NOT_VALID.status);
+        }
+
+        next();
+    } catch (err) {
+        next(err);
+    }
+};
+
 module.exports = {
-    isClientWithIdRegistered
+    isClientWithIdRegistered,
+    isClientValid
 };

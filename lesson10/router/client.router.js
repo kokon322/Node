@@ -6,17 +6,17 @@ const {
     }
 } = require('../controller');
 
-const { clientMiddleware: { isClientWithIdRegistered } } = require('../middleware');
+const { clientMiddleware: { isClientWithIdRegistered, isClientValid } } = require('../middleware');
 
 router
-    .post('/', createClient)
+    .post('/', isClientValid, createClient)
     .get('/', getAllClients);
 
 router
     .use('/:Id', isClientWithIdRegistered);
 
 router
-    .put('/:Id', updateClient)
+    .put('/:Id', isClientValid, updateClient)
     .get('/:Id', getClientById)
     .delete('/:Id', deleteClient);
 
